@@ -13,8 +13,24 @@
   [url]
   (parse-string (slurp url)))
 
+(defn read-element
+  "Get the targeted data from Elements"
+  [element]
+  {:text (.text element)
+   :html (.html element)
+   :attrs (reduce
+           (fn [attrs el]
+             (merge
+              attrs
+              (hash-map (keyword (.getKey el))
+                        (.getValue el))))
+           {}
+           (-> element .attributes .asList))
+   :children (map read-element
+                  (.children element))})
+
 (defn select
   "Uses JSoup CSS style syntax to select
   elements from parsed HTML"
   [parsed selector]
-  (.select parsed selector))
+  (map read-element (.select parsed selector)))

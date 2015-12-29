@@ -53,8 +53,8 @@ The result is a Clojure data structure. Children remain JSoup Elements.
   :html "<b>Stuff</b>"
   :attrs {:class "h1"
           :data-x "1"}
-  :children [{:text "Stuff"
-              ...}])
+  :children ({:text "Stuff"
+              ...}))
 ```
 
 ## License
