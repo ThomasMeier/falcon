@@ -13,13 +13,8 @@
   [url]
   (parse-string (slurp url)))
 
-(defn sel
+(defn select
   "Uses JSoup CSS style syntax to select
   elements from parsed HTML"
   [parsed selector]
   (.select parsed selector))
-
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
