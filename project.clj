@@ -3,6 +3,4 @@
   :url "https://github.com/ThomasMeier"
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.jsoup/jsoup "1.8.3"]]
-  :main ^:skip-aot falcon.core
-  :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:test {:resource-paths ["test/test_resources"]}})
