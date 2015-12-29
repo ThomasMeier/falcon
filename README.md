@@ -1,12 +1,14 @@
 # falcon
 
-Fast and simple CSS-style selectors for HTML using [JSoup][1].
+[![Build Status](https://travis-ci.org/ThomasMeier/falcon.svg?branch=master)](https://travis-ci.org/ThomasMeier/falcon)
+
+Easy CSS-style selectors for HTML using [JSoup][1].
 
 [1]: http://jsoup.org/
 
 ## Installation
 
-After release, add to your dependencies in `project.clj`:
+Add to dependencies in `project.clj`:
 
     [falcon "0.1.0"]
 
@@ -14,7 +16,7 @@ After release, add to your dependencies in `project.clj`:
 
 ##### 1. Parse
 
-First you need some HTML to pass through the parser.
+First, you need some HTML parsed.
 
 ```clj
 (ns (:require [falcon.core :as falcon]))
@@ -22,7 +24,7 @@ First you need some HTML to pass through the parser.
 (def parsed-html (falcon/parse "http://google.com"))
 ```
 
-Or, if you have a string of HTML you'd like to parse
+Or, if you have a string of HTML,
 
 ```clj
 (def parsed-html
@@ -31,7 +33,7 @@ Or, if you have a string of HTML you'd like to parse
 ```
 
 ##### 2. Select
-Then you may select using the parsed HTML.
+Then select using the parsed HTML and a CSS-style selector.
 
 ```clj
 (def elements
@@ -39,22 +41,32 @@ Then you may select using the parsed HTML.
     (falcon/select parsed-html ".hi")))
 ```
 
-Check out all the selector options at [JSoup Selector Syntax][2]. Most selectors
-return collections.
+Check out all the possible selectors at [JSoup Selector Syntax][2].
 
 [2]: http://jsoup.org/cookbook/extracting-data/selector-syntax
 
 ##### 3. Use
 
-The result is a Clojure data structure. Children remain JSoup Elements.
+The result is a simplified Clojure data structure.
 
 ```clj
 ({:text "Stuff"
   :html "<b>Stuff</b>"
-  :attrs {:class "h1"
+  :attrs {:class "hi"
           :data-x "1"}
   :children ({:text "Stuff"
               ...}))
+```
+
+## Example
+
+```clj
+repl> (falcon/select
+       (falcon/parse "https://reddit.com/r/clojure")
+       "h1.redditname a")
+
+({:text "Clojure"
+     ...})
 ```
 
 ## License
